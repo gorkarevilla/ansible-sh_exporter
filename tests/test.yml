@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  remote_user: root
+  sudo: yes
+  tasks:
+    - name: Check if sh_exporter service is enabled
+      command: systemctl is-enabled sh_exporter
+      register: command_result
+      failed_when: "'disabled' in command_result.stdout"
+
+    - shell: "systemctl status sh_exporter | grep -i running"
+      register: status
+      failed_when: status.rc != 0

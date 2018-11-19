@@ -1,0 +1,4 @@
+---
+# vars file for ansible-prometheus
+sh_exporter_archive: "sh_exporter-{{ sh_exporter_version }}"
+sh_exporter_tarball_url: "https://github.com/gorkarevilla/sh_exporter/archive/v{{ sh_exporter_version }}.tar.gz"

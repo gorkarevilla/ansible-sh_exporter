@@ -1,0 +1,14 @@
+---
+# handlers file for ansible-prometheus
+
+- name: reload daemon
+  command: systemctl daemon-reload
+
+- name: restart sh_exporter
+  service: name=sh_exporter state=restarted enabled=yes
+
+- name: stop sh_exporter
+  service: name=sh_exporter state=stopped
+
+- name: start sh_exporter
+  service: name=sh_exporter state=started

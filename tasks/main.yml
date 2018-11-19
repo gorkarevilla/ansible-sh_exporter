@@ -1,0 +1,27 @@
+---
+# tasks file for ansible-prometheus
+- name: Create sh_exporter group
+  group:
+    name: "{{ sh_exporter_group }}"
+    state: present
+
+- name: Create sh_exporter user
+  user:
+    name: "{{ sh_exporter_owner }}"
+    group: "{{ sh_exporter_group }}"
+    createhome: no
+    shell: /sbin/nologin
+    state: present
+
+- name: "Create {{ prometheus_install_dir }}"
+  file:
+    path: "{{ sh_exporter_install_dir }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: 0755
+
+- name: Install sh_exporter
+  include: install-sh_exporter.yml
+  when: sh_exporter_install
+

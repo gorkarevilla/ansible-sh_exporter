@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Gorka Revilla
+  description: Ansible playbook for managing sh_exporter
+  company: gorkarevilla.com
+
+  license: BSD
+
+  min_ansible_version: 2.1
+
+  platforms:
+    - name: EL
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - xenial
+
+  galaxy_tags:
+    - prometheus
+    - shell
+    - scripts
+    - monitoring
+
+dependencies: []

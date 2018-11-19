@@ -1,0 +1,28 @@
+---
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  # Pull container.
+  - 'sudo docker build -t ansible-sh_exporter/tests tests'
+
+script:
+  # Print ansible version
+  - 'sudo ./run-test-unit.sh ansible --version'
+
+  # Check Ansible host setup
+  - 'sudo ./run-test-unit.sh ansible all -i "localhost," -c local -m setup'
+
+  # Ansible syntax check.
+  - 'sudo ./run-test-unit.sh ansible-playbook /home/ansible-sh_exporter/tests/playbook.yml --syntax-check'
+
+  # Test role.
+  - 'sudo ./run-test-unit.sh ansible-playbook /home/ansible-sh_exporter/tests/playbook.yml'
+
+  # Test role.
+  - 'sudo ./run-test-unit.sh ansible-playbook /home/ansible-sh_exporter/tests/test.yml'
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
